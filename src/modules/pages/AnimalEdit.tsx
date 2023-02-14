@@ -42,7 +42,7 @@ export const AnimalEdit = () => {
 			{animalState.animal && (
 				<>
 					<h1>Edit animal</h1>
-					<AnimalForm animal={animalState.animal} />
+					<AnimalForm defaultAnimal={animalState.animal} />
 				</>
 			)}
 		</div>

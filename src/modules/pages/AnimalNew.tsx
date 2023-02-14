@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { IAnimal } from "./../../model/animal";
-import { API_URL } from "./../../constants";
+import React from "react";
 import { AnimalForm } from "./../components/AnimalForm";
 
 export const AnimalNew = () => {
 	return (
 		<div>
-			<AnimalForm animal={null} />
+			<h1>Add Animal</h1>
+			{<AnimalForm />}
 		</div>
 	);
 };

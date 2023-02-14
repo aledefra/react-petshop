@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IAnimal } from "./../../model/animal";
 import { API_URL } from "./../../constants";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 type TAnimalState = {
@@ -12,6 +12,8 @@ type TAnimalState = {
 
 export const AnimalDetail = () => {
 	let { _id } = useParams();
+
+	const navigate = useNavigate();
 
 	const [animalState, setAnimalState] = useState<TAnimalState>({
 		loading: false,
@@ -73,19 +75,28 @@ export const AnimalDetail = () => {
 						{new Date(animalState.animal.updated_at!).toLocaleString()}
 					</p>
 
-					<Link
-						className="btnLink"
-						to={"/animal/" + animalState.animal._id + "/edit"}
-					>
-						Edit
-					</Link>
+					<div className="btnGroup">
+						<Link
+							className="btnLink"
+							to={"/animal/" + animalState.animal._id + "/edit"}
+						>
+							Edit
+						</Link>
 
-					<Link
-						className="btnLink danger"
-						to={"/animal/" + animalState.animal._id + "/edit"}
-					>
-						Delete
-					</Link>
+						<button
+							className="btnLink danger"
+							onClick={async () => {
+								if (
+									window.confirm("Are you sure you want to delete this animal?")
+								) {
+									await axios.delete(`${API_URL}/${animalState.animal!._id}`);
+									navigate("/animals");
+								}
+							}}
+						>
+							Delete
+						</button>
+					</div>
 				</>
 			)}
 		</div>
