@@ -31,10 +31,8 @@ export const AnimalForm = ({ defaultAnimal }: Props) => {
 	});
 
 	const save = async (data: IAnimal) => {
-		console.log(data);
 		try {
 			setPageState({ ...pageState, saving: true });
-			console.log(data);
 			const res = isModifying
 				? await axios.put(`${API_URL}/${defaultAnimal!._id}`, data)
 				: await axios.post(`${API_URL}`, data);
@@ -42,7 +40,6 @@ export const AnimalForm = ({ defaultAnimal }: Props) => {
 			setPageState({ ...pageState, saving: false });
 			navigate(`/animal/${res.data._id}`);
 		} catch (error) {
-			console.log(error);
 			setPageState({ ...pageState, saving: false, error: true });
 		}
 	};
