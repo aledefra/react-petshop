@@ -90,7 +90,7 @@ export const AnimalDetail = () => {
 									window.confirm("Are you sure you want to delete this animal?")
 								) {
 									await axios.delete(`${API_URL}/${animalState.animal!._id}`);
-									navigate("/animals");
+									navigate("/animal");
 								}
 							}}
 						>
